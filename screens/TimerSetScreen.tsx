@@ -12,8 +12,9 @@ import { useDispatch } from 'react-redux';
 import { updateCurrentTimerSettingSlice } from '../redux/currentTimerSettingSlice';
 
 const { width, height } = Dimensions.get('window');
+import { NavProps } from './screenTypes';
 
-export default function TimerSetScreen({ navigation, route }) {
+export default function TimerSetScreen({ navigation, route }: NavProps) {
   const [presetName, setPresetName] = useState("NEW WORKOUT");
   const [sets, setSets] = useState(4);
   const [workTime, setWorkTime] = useState(120);
@@ -46,10 +47,10 @@ export default function TimerSetScreen({ navigation, route }) {
   useEffect(() => {
     setTotalDuration(sets * (workTime + rest) - rest);
     dispatch(updateCurrentTimerSettingSlice({ sets, workTime, rest }))
+    setPresetName("NEW WORKOUT");
     // console.log("sets", sets)
     // console.log("workTime", workTime)
     // console.log("rest", rest)
-    // setPresetName("NEW WORKOUT");
   }, [sets, workTime, rest])
 
   // whenever new preset is created, or pressed on from presets library
@@ -60,7 +61,7 @@ export default function TimerSetScreen({ navigation, route }) {
       setRest(presetInfo?.restTime);
       setPresetName(presetInfo?.presetName);
     }
-  }, [presetInfo])
+  }, [route.params])
 
   // // resets name if preset is deleted by checking if current preset exists in async storage still.
   // useEffect(() => {

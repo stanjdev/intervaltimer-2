@@ -25,12 +25,15 @@ const trashcan = require('../assets/screen-icons/trashcan.png');
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { SwipeListView } from 'react-native-swipe-list-view';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { deletePreset } from '../redux/presetsSlice';
+import { NavProps } from './screenTypes';
 
-export default function PresetsLibraryScreen ({ route, navigation }) {
+export default function PresetsLibraryScreen ({ route, navigation }: NavProps) {
   const isFocused = useIsFocused();
 
   const reduxSavedPresets = useSelector((state: any) => state.presets.value)
+  const dispatch = useDispatch();
 
   // let [fontsLoaded] = useFonts({
   //   'SourceCodePro-Regular': require('../assets/fonts/Source_Code_Pro/SourceCodePro-Regular.ttf'),
@@ -108,31 +111,13 @@ export default function PresetsLibraryScreen ({ route, navigation }) {
   const deleteItem = (data, rowMap) => {
     Alert.alert("Delete this preset?", "This action cannot be undone.", [
       {text: "Delete", style: "cancel", onPress: async () => {
-        // closeRow(rowMap, data.item.key);
-
-        // get the AsyncStored array
-        // let storedPresets = await AsyncStorage.getItem('presetsArray');
-        let storedPresets = undefined;
-        let presetsArr = await JSON.parse(storedPresets);
-
-        // remove specific exercise from array
-        let indexToDelete = presetsArr.map(preset => preset.key).indexOf(data.item.key);
-        presetsArr.splice(indexToDelete, 1);
-
-        // remove entire previous async stored array
-        await AsyncStorage.removeItem('presetsArray');
-
-        // to set a new array to async storage
-        await AsyncStorage.setItem('presetsArray', JSON.stringify(presetsArr));
-        setPresetsLib(presetsArr);
+        const idx = reduxSavedPresets.indexOf(data.item)
+        dispatch(deletePreset(idx))
+        setPresetsLib(reduxSavedPresets);
       }},
       {text: "Cancel", onPress: () => closeRow(rowMap, data.item.key)}
     ]);
   };
-
-  // useEffect(() => {
-
-  // }, [deleteItem])
 
 
   const renderFrontItem = (data, i) => (

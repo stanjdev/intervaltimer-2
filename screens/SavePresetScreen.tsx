@@ -8,10 +8,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { savePreset } from '../redux/presetsSlice';
+import { NavProps } from './screenTypes';
 
 const { width, height } = Dimensions.get('window');
 
-export default function SavePresetScreen({ navigation, route }) {
+export default function SavePresetScreen({ navigation, route }: NavProps) {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
   const carryOverTimerSetting = useSelector((state: any) => state.currentTimerSetting.value)

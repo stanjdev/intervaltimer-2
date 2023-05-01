@@ -3,8 +3,16 @@ import { View } from "react-native";
 
 import { RADIUS } from "./Constants";
 
-export default function HalfCircle ({ percent, workOrRest, color, leftBorderColor, rotation="0deg" }) {
-  console.log(workOrRest)
+interface HalfCircleProps {
+  percent: number
+  workOrRest: string
+  color: string
+  leftBorderColor: string
+  rotation: string
+}
+
+export default function HalfCircle ({ percent, workOrRest, color, leftBorderColor, rotation="0deg" }: HalfCircleProps) {
+  // console.log(workOrRest)
   return(
     <View style={{
       height: RADIUS,

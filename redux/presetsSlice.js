@@ -20,10 +20,13 @@ export const presetsSlice = createSlice({
   reducers: {
     savePreset: (state, action) => {
       state.value.push(action.payload)
+    },
+    deletePreset: (state, action) => {
+      state.value.splice(action.payload, 1)
     }
   }
 })
 
-export const { savePreset } = presetsSlice.actions
+export const { savePreset, deletePreset } = presetsSlice.actions
 
 export default presetsSlice.reducer

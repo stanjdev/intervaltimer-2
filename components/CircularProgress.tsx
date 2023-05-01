@@ -5,8 +5,16 @@ import { withAnchorPoint } from "react-native-anchor-point";
 import HalfCircle from "./HalfCircle";
 import { PI, RADIUS } from "./Constants";
 
+interface CircularProgressProps {
+  workOrRest: string
+  percent: number
+  leftColor: string
+  rightColor: string
+  rotation: string
+}
 
-export default function CircularProgress({ workOrRest, percent, leftColor, rightColor, rotation }) {
+
+export default function CircularProgress({ workOrRest, percent, leftColor, rightColor, rotation }: CircularProgressProps) {
 
   console.log(`${rotation}deg`)
   const getTransform = () => {

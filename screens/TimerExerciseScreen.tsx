@@ -7,13 +7,16 @@ import { useFonts } from 'expo-font';
 import useInterval from '../hooks/useInterval';
 import { LinearGradient } from 'expo-linear-gradient';
 import CircularProgress from "../components/CircularProgress";
+import { RouteProp } from '@react-navigation/native';
 
 import { Audio, InterruptionModeIOS, InterruptionModeAndroid } from 'expo-av';
 import { Sound } from 'expo-av/build/Audio';
 
 const { width, height } = Dimensions.get('window');
 
-export default function TimerExerciseScreen({ route, navigation }) {
+import { NavProps } from './screenTypes';
+
+export default function TimerExerciseScreen({ route, navigation }: NavProps) {
   useKeepAwake();
   const isFocused = useIsFocused();
 
@@ -53,14 +56,14 @@ export default function TimerExerciseScreen({ route, navigation }) {
   // const [ secs, setSecs ] = useState(2);
 
   // Add leading zero to numbers 9 or below (purely for aesthetics):
-  function leadingZero(time) {
+  function leadingZero(time: any) {
       if (time <= 9) {
           time = "0" + time;
       }
       return time;
   };
 
-  // useInterval() ATTEMPT - ghetto, but works for the most part. once it hits 00:00, it still hits the else, and still runs every second. BUT DESTRUCTURING THE CLEAR() METHOD FROM USEINTERVAL FUNCTION AND CALLING THAT WORKS!
+  // useInterval() ATTEMPT - works for the most part. once it hits 00:00, it still hits the else, and still runs every second. BUT DESTRUCTURING THE CLEAR() METHOD FROM USEINTERVAL FUNCTION AND CALLING THAT WORKS!
   // COUNTDOWN - useInterval()
   const runExerciseClock = () => {
     if (secs > 0) {
