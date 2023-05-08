@@ -25,7 +25,8 @@
     "react-native": "0.71.6",
     "react-native-anchor-point": "^1.0.6",
     "react-native-swipe-list-view": "^3.2.9",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -37,7 +37,7 @@ export default function CircularProgress({ workOrRest, percent, leftColor, right
           ],
           zIndex: percent > 0.5 ? 1 : -1
         }}>
-          <HalfCircle workOrRest={workOrRest} percent={percent} color={leftColor} leftBorderColor={leftColor} rotation={"0deg"}/>
+          <HalfCircle workOrRest={workOrRest} percent={percent} color={''} rotation={"0deg"}/>
         </View>
 
         {/* Right half */}
@@ -49,7 +49,7 @@ export default function CircularProgress({ workOrRest, percent, leftColor, right
           ],
           zIndex: percent < 0.5 ? 1 : -1
         }}>
-          <HalfCircle workOrRest={workOrRest} percent={percent} color={percent < 0.5 ? "black" : rightColor} rotation={"180deg"}/>
+          <HalfCircle workOrRest={workOrRest} percent={percent} color={''} rotation={"180deg"}/>
         </View>
 
       </View>

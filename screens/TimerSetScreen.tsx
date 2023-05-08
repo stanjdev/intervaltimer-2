@@ -15,7 +15,7 @@ const { width, height } = Dimensions.get('window');
 import { NavProps } from './screenTypes';
 
 export default function TimerSetScreen({ navigation, route }: NavProps) {
-  const [presetName, setPresetName] = useState("NEW WORKOUT");
+  const [presetName, setPresetName] = useState(route.params?.presetInfo?.presetName || "NEW TIMER");
   const [sets, setSets] = useState(4);
   const [workTime, setWorkTime] = useState(120);
   const [rest, setRest] = useState(180);
@@ -47,7 +47,7 @@ export default function TimerSetScreen({ navigation, route }: NavProps) {
   useEffect(() => {
     setTotalDuration(sets * (workTime + rest) - rest);
     dispatch(updateCurrentTimerSettingSlice({ sets, workTime, rest }))
-    setPresetName("NEW WORKOUT");
+    // setPresetName("NEW WORKOUT");
     // console.log("sets", sets)
     // console.log("workTime", workTime)
     // console.log("rest", rest)
@@ -55,11 +55,11 @@ export default function TimerSetScreen({ navigation, route }: NavProps) {
 
   // whenever new preset is created, or pressed on from presets library
   useEffect(() => {
-    if (presetInfo) {
+    if (route.params) {
+      setPresetName(presetInfo?.presetName);
       setSets(presetInfo?.numSets);
       setWorkTime(presetInfo?.workTime);
       setRest(presetInfo?.restTime);
-      setPresetName(presetInfo?.presetName);
     }
   }, [route.params])
 
@@ -205,7 +205,7 @@ const SliderComponent = ({name, state, maxValue, onChange, }) => {
         style={{width: width * 0.8, height: 40}}
         minimumValue={1}
         maximumValue={maxValue}
-        value={name === "SETS" ? state : Math.floor(state / 60)}
+        value={name === "SETS" ? state : Math.floor(state / 30)}
         minimumTrackTintColor="#FAFF00"
         maximumTrackTintColor="#3C3C43"
         step={1}

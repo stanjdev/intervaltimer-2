@@ -158,7 +158,7 @@ export default function PresetsLibraryScreen ({ route, navigation }: NavProps) {
 
 
     {presetsLib.length ?
-      <View style={{ alignItems: "center", marginBottom: height * 0.05 }}>
+      <View style={{ alignItems: "center", marginBottom: height * 0.05, height: height }}>
         <SwipeListView
           data={presetsLib}
           renderItem={renderFrontItem}
@@ -172,7 +172,7 @@ export default function PresetsLibraryScreen ({ route, navigation }: NavProps) {
           // onRowOpen={rowKey => console.log(`opened ${rowKey}`)}
         />
 
-        {/* MOCK DATA */}
+        {/* MOCK DATA, FlatList */}
         {/* <FlatList
           data={sampleWorkouts}
           // renderItem={({item}) => <PresetButton presetName={item.presetName} onPress={() => console.log("OFIDSJf")}/>}
